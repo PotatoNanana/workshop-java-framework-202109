@@ -18,7 +18,6 @@ public class UserGateway {
         this.restTemplate=builder.build();
     }
 
-
     public Optional<UserResponse> getUserById(int id) {
         String url = "https://jsonplaceholder.typicode.com/users/" + id;
         try {
