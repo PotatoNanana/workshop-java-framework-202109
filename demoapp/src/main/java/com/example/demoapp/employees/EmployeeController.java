@@ -11,7 +11,7 @@ public class EmployeeController {
     private  EmployeeService employeeService;
 
     @GetMapping("/employees/{id}")
-    public EmployeeResponse getEmployeeById(@PathVariable String id){
+    public EmployeeResponse getEmployeeById(@PathVariable String id) throws EmployeeNotFoundException {
         // Validate input
         // Cleansing data
         EmployeeResponse employee01 = employeeService.getById(Integer.parseInt(id));

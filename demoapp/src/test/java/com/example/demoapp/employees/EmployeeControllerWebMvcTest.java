@@ -24,7 +24,7 @@ class EmployeeControllerWebMvcTest {
     private EmployeeService employeeService;
 
     @Test
-    public void success_getEmployeeById() throws Exception {
+    public void success_getEmployeeById() throws Exception, EmployeeNotFoundException {
         int id=100;
 
         // Arrange

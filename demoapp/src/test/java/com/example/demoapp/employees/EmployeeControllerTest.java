@@ -10,6 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class EmployeeControllerTest {
     @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
     private TestRestTemplate restTemplate;
 
     @Test
@@ -25,7 +28,10 @@ class EmployeeControllerTest {
     @Test
     public void getEmployeeById(){
         //Arrange
-        int id = 100;
+        int id = 1;
+        Employee employee100=new Employee();
+        employee100.setName("Napat");
+        employeeRepository.save(employee100);
 
         // Act
         EmployeeResponse result = restTemplate.getForObject("/employees/"+id,EmployeeResponse.class);

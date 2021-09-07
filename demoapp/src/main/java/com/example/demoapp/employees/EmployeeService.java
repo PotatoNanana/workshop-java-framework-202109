@@ -11,7 +11,7 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public EmployeeResponse getById(int id) {
+    public EmployeeResponse getById(int id) throws EmployeeNotFoundException {
 //        EmployeeResponse response=new EmployeeResponse();
 //        response.setId(id);
 //        response.setName("Napat");
@@ -24,7 +24,7 @@ public class EmployeeService {
            return response;
        }
 
-       throw new RuntimeException("Employee not found id="+id);
+       throw new EmployeeNotFoundException("Employee not found id="+id);
 //        return response;
     }
 }
