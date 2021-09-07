@@ -11,6 +11,6 @@ public class EmployeeControllerAdvice {
     @ExceptionHandler(EmployeeNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleEmployeeNotFound(EmployeeNotFoundException exception){
         ErrorResponse errorResponse = new ErrorResponse(404,exception.getMessage());
-        return new ResponseEntity<>(errorResponse,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse,HttpStatus.OK);
     }
 }
