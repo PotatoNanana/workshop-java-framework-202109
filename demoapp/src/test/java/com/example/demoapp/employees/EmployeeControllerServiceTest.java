@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -38,5 +40,21 @@ class EmployeeControllerServiceTest {
         // Assert
         assertEquals(id,result.getId());
         assertEquals("Mock name",result.getName());
+    }
+
+    @Test
+    @DisplayName("Failure case :: Employee not found id = 100")
+    public void case02(){
+        //Arrange
+        int id = 100;
+
+        // Act
+        ResponseEntity<ErrorResponse> result = restTemplate.getForEntity("/employees/"+id,ErrorResponse.class);
+
+        // Assert
+//        assertEquals();
+        assertEquals(200,result.getStatusCodeValue());
+        assertEquals(404,result.getBody().getCode());
+        assertEquals("Employee not found id=100",result.getBody().getDetail());
     }
 }
