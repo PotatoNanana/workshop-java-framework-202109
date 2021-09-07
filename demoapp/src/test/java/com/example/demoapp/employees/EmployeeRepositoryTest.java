@@ -37,6 +37,12 @@ public class EmployeeRepositoryTest {
     }
 
     @Test
+    @DisplayName("ค้นหาข้อมูลไม่เจอ id = 1")
     public void case02() {
+        // Act
+        Optional<Employee> result=employeeRepository.findById(1);
+
+        // Assert
+        assertFalse(result.isPresent());
     }
 }
