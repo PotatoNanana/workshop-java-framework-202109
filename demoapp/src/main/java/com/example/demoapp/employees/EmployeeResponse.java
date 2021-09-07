@@ -1,4 +1,4 @@
-package com.example.demoapp.Employees;
+package com.example.demoapp.employees;
 
 public class EmployeeResponse {
     private  int id;
