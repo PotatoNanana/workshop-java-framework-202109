@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
@@ -14,18 +12,17 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceUnitTest {
+
     @Mock
     private EmployeeRepository employeeRepository;
 
     @Test
-    public void success_case() throws EmployeeNotFoundException {
+    public void success_case() {
         // Arrange
-//        EmployeeService employeeService = new EmployeeService();
         Employee employee = new Employee();
         employee.setId(1);
         employee.setName("Mock name");
         when(employeeRepository.findById(1)).thenReturn(Optional.of(employee));
-
         // Act
         EmployeeService employeeService = new EmployeeService(employeeRepository);
         EmployeeResponse result = employeeService.getById(1);
@@ -51,4 +48,15 @@ public class EmployeeServiceUnitTest {
         }
     }
 
+    @Test
+    public void employee_not_found_case_with_junit5() {
+        // Arrange
+        when(employeeRepository.findById(1)).thenReturn(Optional.empty());
+        // Act
+        EmployeeService employeeService = new EmployeeService(employeeRepository);
+        Exception exception = assertThrows(EmployeeNotFoundException.class, () -> {
+            employeeService.getById(1);
+        });
+        assertEquals("Employee not found id=1", exception.getMessage());
+    }
 }
